@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.title,
+.date,
+.parag {
+  text-align: center;
+}
+
+.title {
+  color: green;
+  margin: 1rem;
+}
+.date {
+  color: blue;
+}
+
+.parag {
+  font-weight: 600;
+  color: red;
+}
+
+.btn {
+  background-color: blue;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.w1 {
+  flex-direction: column;
+}
+
+.w2 {
+  flex-direction: row;
+}
+
+.grid {
+  width: 100%;
+  padding: 1rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 0.5rem;
+}
