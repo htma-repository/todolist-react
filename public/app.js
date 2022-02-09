@@ -1,112 +1,272 @@
 const root = document.querySelector('#root');
 
-const Tick = () => {
+const Tick = (props) => {
   const [count, setCount] = React.useState(1);
-  const [login, setLogin] = React.useState(false);
+  const [login, setLogin] = React.useState(false); // useState RickMorty API
+
   const [imageName, setImageName] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(true); // useState ToDo
 
-  const Kali = () => setCount(count * 2);
+  const [inputActivity, setInputActivity] = React.useState('');
+  const [date, setDate] = React.useState('');
+  const [todo, setTodo] = React.useState([]);
+  const [edit, setEdit] = React.useState({});
+  const [message, setMessage] = React.useState(''); // React.useEffect(() => {
+  //   // Using Fetch
+  //   /*   fetch('https://rickandmortyapi.com/api/character')
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       const rick = res.results;
+  //       setImage(rick[0].image);
+  //       setName(rick[0].name);
+  //     }); */
+  //   // Using Async Await
+  //   const rickMorty = async () => {
+  //     try {
+  //       const reqData = await fetch(
+  //         'https://rickandmortyapi.com/api/character'
+  //       );
+  //       const response = await reqData.json();
+  //       const resp = await response.results;
+  //       setImageName(resp);
+  //       setLoading(false);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+  //   rickMorty();
+  // }),
+  //   [];
+  // const rickMorty = imageName.map((rick) => {
+  //   return (
+  //     <li key={rick.id} className="grid">
+  //       <img src={rick.image} alt="" style={{ borderRadius: '.5rem' }} />
+  //       <h3 className="title">{rick.name}</h3>
+  //     </li>
+  //   );
+  // });
+  // const setLoginFunc = () => setLogin(false);
+  // if (login === true) {
+  //   return (
+  //     <div className="wrap w1">
+  //       <h1 className="title">Anda Sudah Login</h1>
+  //       <button className="btn" onClick={setLoginFunc}>
+  //         Logout
+  //       </button>
+  //     </div>
+  //   );
+  // }
+  // const Kali = () => setCount(count * 2);
+  // const Bagi = () => setCount(count / 2);
+  // const bandsName = ['Radiohead', 'Blur', 'Coldplay', 'Trivium'];
+  // bandsName.push('Oasis', 'The Cure');
+  // bandsName.unshift('The Verve');
+  // const bandName = [
+  //   {
+  //     name: bandsName[1],
+  //     songTitle: 'Creep',
+  //   },
+  //   {
+  //     name: bandsName[2],
+  //     songTitle: 'Coffe & TV',
+  //   },
+  //   {
+  //     name: bandsName[3],
+  //     songTitle: 'Yellow',
+  //   },
+  // ];
+  // const bands = bandName.map((band) => {
+  //   return (
+  //     <li key={band.name}>
+  //       <h3>
+  //         {band.name} - {band.songTitle}
+  //       </h3>
+  //     </li>
+  //   );
+  // });
 
-  const Bagi = () => setCount(count / 2);
-
-  const setLoginFunc = () => {
-    setLogin(false);
+  const GenerateId = () => {
+    return Date.now();
   };
 
-  React.useEffect(() => {
-    // Using Fetch
+  const InputChange = (e) => {
+    return setInputActivity(e.target.value);
+  };
 
-    /*   fetch('https://rickandmortyapi.com/api/character')
-      .then((res) => res.json())
-      .then((res) => {
-        const rick = res.results;
-        setImage(rick[0].image);
-        setName(rick[0].name);
-      }); */
-    // Using Async Await
-    const rickMorty = async () => {
-      try {
-        const reqData = await fetch('https://rickandmortyapi.com/api/character');
-        const response = await reqData.json();
-        const resp = await response.results;
-        setImageName(resp);
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const DateChange = (e) => {
+    return setDate(e.target.value);
+  };
 
-    rickMorty();
-  }), [];
-  const rickMorty = imageName.map(i => {
-    return /*#__PURE__*/React.createElement("li", {
-      key: i.id,
-      className: "grid"
-    }, /*#__PURE__*/React.createElement("img", {
-      src: i.image,
-      alt: "",
-      style: {
-        borderRadius: '.5rem'
-      }
-    }), /*#__PURE__*/React.createElement("h3", {
-      className: "title"
-    }, i.name));
-  });
-  const bandsName = ['Radiohead', 'Blur', 'Coldplay', 'Trivium'];
-  bandsName.push('Oasis', 'The Cure');
-  bandsName.unshift('The Verve');
-  const bands = bandsName.map(band => /*#__PURE__*/React.createElement("li", {
-    key: band
-  }, /*#__PURE__*/React.createElement("h3", null, band)));
+  const todoObj = {
+    id: GenerateId(),
+    inputActivity,
+    date,
+  };
 
-  if (login) {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "wrap w1"
-    }, /*#__PURE__*/React.createElement("h1", {
-      className: "title"
-    }, "Anda Sudah Login"), /*#__PURE__*/React.createElement("button", {
-      className: "btn",
-      onClick: setLoginFunc
-    }, "Logout"));
-  }
+  const OnSubmitInput = (e) => {
+    e.preventDefault();
 
-  return /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement("div", {
-    className: "wrap w1"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
-    className: "title"
-  }, "Jam Sekarang"), /*#__PURE__*/React.createElement("h2", {
-    className: "date"
-  }, new Date().toLocaleTimeString()), /*#__PURE__*/React.createElement("p", {
-    className: "parag"
-  }, "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore tenetur sint aliquid nulla ", /*#__PURE__*/React.createElement("br", null), "nihil quaerat modi, illo dolor animi, quos fuga eligendi facilis! Temporibus placeat labore iusto eveniet magni maxime!")), /*#__PURE__*/React.createElement("button", {
-    className: "btn",
-    onClick: () => {
-      setLogin(true);
+    if (!inputActivity) {
+      return setMessage('Input Activity');
     }
-  }, "Login")), /*#__PURE__*/React.createElement("div", {
-    className: "wrap w2"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "btn",
-    onClick: Bagi
-  }, "/2"), /*#__PURE__*/React.createElement("h1", {
-    className: "title"
-  }, count), /*#__PURE__*/React.createElement("button", {
-    className: "btn",
-    onClick: Kali
-  }, "X2")), /*#__PURE__*/React.createElement("div", {
-    className: "wrap w1"
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "title"
-  }, "List Band Name"), /*#__PURE__*/React.createElement("ul", null, bands)), /*#__PURE__*/React.createElement("div", {
-    className: "wrap w1"
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "title"
-  }, "Rick & Morty API"), /*#__PURE__*/React.createElement("ul", {
-    className: "grid"
-  }, loading ? /*#__PURE__*/React.createElement("h1", {
-    className: "title"
-  }, "Loading") : rickMorty)));
+
+    setMessage('');
+
+    if (edit.id) {
+      const updateTodo = {
+        id: edit.id,
+        inputActivity,
+        date,
+      };
+      const indexTodo = todo.findIndex((todo) => {
+        return todo.id === edit.id;
+      });
+      const newUpdateTodo = [...todo];
+      newUpdateTodo[indexTodo] = updateTodo;
+      setInputActivity('');
+      setDate('');
+      setTodo(newUpdateTodo);
+      return cancelEditHandler();
+    } else {
+      setTodo([...todo, { ...todoObj }]);
+      setInputActivity('');
+      setDate('');
+    }
+  };
+
+  const TodoDeleteHandler = (todoId) => {
+    const todoFilter = todo.filter((t) => {
+      return t.id != todoId;
+    });
+    confirm('apakah ingin delete activity?')
+      ? setTodo(todoFilter)
+      : setTodo(todo);
+
+    if (edit.id) {
+      cancelEditHandler();
+    }
+  };
+
+  const TodoEditHandler = (todo) => {
+    setInputActivity(todo.inputActivity);
+    setDate(todo.date);
+    setEdit(todo);
+  };
+
+  const cancelEditHandler = () => {
+    setEdit({});
+    setInputActivity('');
+    setDate('');
+  };
+
+  return /*#__PURE__*/ React.createElement(
+    'section',
+    null,
+    /*#__PURE__*/ React.createElement(
+      'div',
+      {
+        className: 'wrap w1',
+      },
+      /*#__PURE__*/ React.createElement(
+        'h1',
+        {
+          className: 'title',
+        },
+        'Todo List'
+      ),
+      message &&
+        /*#__PURE__*/ React.createElement(
+          'h1',
+          {
+            style: {
+              color: 'red',
+            },
+          },
+          message
+        ),
+      /*#__PURE__*/ React.createElement(
+        'form',
+        {
+          className: ' grid',
+          onSubmit: OnSubmitInput,
+        },
+        /*#__PURE__*/ React.createElement('input', {
+          type: 'text',
+          placeholder: 'Todo...',
+          value: inputActivity,
+          className: 'input',
+          onChange: InputChange,
+        }),
+        /*#__PURE__*/ React.createElement('input', {
+          type: 'date',
+          value: date,
+          className: 'input',
+          onChange: DateChange,
+        }),
+        /*#__PURE__*/ React.createElement(
+          'button',
+          {
+            className: 'btn',
+          },
+          edit.id ? 'Update' : 'Submit'
+        ),
+        edit.id &&
+          /*#__PURE__*/ React.createElement(
+            'button',
+            {
+              className: 'btn',
+              onClick: cancelEditHandler,
+            },
+            'Cancel'
+          )
+      ),
+      todo.length > 0
+        ? /*#__PURE__*/ React.createElement(
+            'ul',
+            null,
+            todo.map((td) => {
+              return /*#__PURE__*/ React.createElement(
+                'li',
+                {
+                  className: 'title wrap w1',
+                  key: td.id,
+                },
+                /*#__PURE__*/ React.createElement(
+                  'h2',
+                  {
+                    className: 'title',
+                  },
+                  td.inputActivity
+                ),
+                /*#__PURE__*/ React.createElement('h4', null, td.date),
+                /*#__PURE__*/ React.createElement(
+                  'button',
+                  {
+                    className: 'btn',
+                    onClick: TodoDeleteHandler.bind(this, td.id),
+                  },
+                  'Delete'
+                ),
+                /*#__PURE__*/ React.createElement(
+                  'button',
+                  {
+                    className: 'btn',
+                    onClick: TodoEditHandler.bind(this, td),
+                  },
+                  'Edit'
+                )
+              );
+            })
+          )
+        : /*#__PURE__*/ React.createElement(
+            'h1',
+            {
+              className: 'title',
+            },
+            'activity empty'
+          )
+    )
+  );
 };
 
-ReactDOM.render( /*#__PURE__*/React.createElement(Tick, null), root);
+ReactDOM.render(/*#__PURE__*/ React.createElement(Tick, null), root);
