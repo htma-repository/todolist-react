@@ -1,4 +1,4 @@
-const root = document.querySelector('#root');
+const root = document.querySelector("#root");
 
 const Tick = (props) => {
   const [count, setCount] = React.useState(1);
@@ -7,11 +7,11 @@ const Tick = (props) => {
   const [imageName, setImageName] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   // useState ToDo
-  const [inputActivity, setInputActivity] = React.useState('');
-  const [date, setDate] = React.useState('');
+  const [inputActivity, setInputActivity] = React.useState("");
+  const [date, setDate] = React.useState("");
   const [todo, setTodo] = React.useState([]);
   const [edit, setEdit] = React.useState({});
-  const [message, setMessage] = React.useState('');
+  const [message, setMessage] = React.useState("");
 
   // React.useEffect(() => {
   //   // Using Fetch
@@ -116,10 +116,10 @@ const Tick = (props) => {
     e.preventDefault();
 
     if (!inputActivity) {
-      return setMessage('Input Activity');
+      return setMessage("Input Activity");
     }
 
-    setMessage('');
+    setMessage("");
 
     if (edit.id) {
       const updateTodo = {
@@ -134,15 +134,15 @@ const Tick = (props) => {
 
       const newUpdateTodo = [...todo];
       newUpdateTodo[indexTodo] = updateTodo;
-      setInputActivity('');
-      setDate('');
+      setInputActivity("");
+      setDate("");
       setTodo(newUpdateTodo);
 
       return cancelEditHandler();
     } else {
       setTodo([...todo, { ...todoObj }]);
-      setInputActivity('');
-      setDate('');
+      setInputActivity("");
+      setDate("");
     }
   };
 
@@ -151,7 +151,7 @@ const Tick = (props) => {
       return t.id != todoId;
     });
 
-    confirm('apakah ingin delete activity?')
+    confirm("apakah ingin delete activity?")
       ? setTodo(todoFilter)
       : setTodo(todo);
 
@@ -168,8 +168,8 @@ const Tick = (props) => {
 
   const cancelEditHandler = () => {
     setEdit({});
-    setInputActivity('');
-    setDate('');
+    setInputActivity("");
+    setDate("");
   };
 
   return (
@@ -208,7 +208,7 @@ const Tick = (props) => {
       <div className="wrap w1">
         <h1 className="title">Todo List</h1>
 
-        {message && <h1 style={{ color: 'red' }}>{message}</h1>}
+        {message && <h1 style={{ color: "red" }}>{message}</h1>}
 
         <form className=" grid" onSubmit={OnSubmitInput}>
           <input
@@ -225,7 +225,7 @@ const Tick = (props) => {
             className="input"
             onChange={DateChange}
           />
-          <button className="btn">{edit.id ? 'Update' : 'Submit'}</button>
+          <button className="btn">{edit.id ? "Update" : "Submit"}</button>
           {edit.id && (
             <button className="btn" onClick={cancelEditHandler}>
               Cancel

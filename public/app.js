@@ -1,17 +1,17 @@
-const root = document.querySelector('#root');
+const root = document.querySelector("#root");
 
-const Tick = (props) => {
+const Tick = props => {
   const [count, setCount] = React.useState(1);
   const [login, setLogin] = React.useState(false); // useState RickMorty API
 
   const [imageName, setImageName] = React.useState([]);
   const [loading, setLoading] = React.useState(true); // useState ToDo
 
-  const [inputActivity, setInputActivity] = React.useState('');
-  const [date, setDate] = React.useState('');
+  const [inputActivity, setInputActivity] = React.useState("");
+  const [date, setDate] = React.useState("");
   const [todo, setTodo] = React.useState([]);
   const [edit, setEdit] = React.useState({});
-  const [message, setMessage] = React.useState(''); // React.useEffect(() => {
+  const [message, setMessage] = React.useState(""); // React.useEffect(() => {
   //   // Using Fetch
   //   /*   fetch('https://rickandmortyapi.com/api/character')
   //     .then((res) => res.json())
@@ -89,65 +89,64 @@ const Tick = (props) => {
     return Date.now();
   };
 
-  const InputChange = (e) => {
+  const InputChange = e => {
     return setInputActivity(e.target.value);
   };
 
-  const DateChange = (e) => {
+  const DateChange = e => {
     return setDate(e.target.value);
   };
 
   const todoObj = {
     id: GenerateId(),
     inputActivity,
-    date,
+    date
   };
 
-  const OnSubmitInput = (e) => {
+  const OnSubmitInput = e => {
     e.preventDefault();
 
     if (!inputActivity) {
-      return setMessage('Input Activity');
+      return setMessage("Input Activity");
     }
 
-    setMessage('');
+    setMessage("");
 
     if (edit.id) {
       const updateTodo = {
         id: edit.id,
         inputActivity,
-        date,
+        date
       };
-      const indexTodo = todo.findIndex((todo) => {
+      const indexTodo = todo.findIndex(todo => {
         return todo.id === edit.id;
       });
       const newUpdateTodo = [...todo];
       newUpdateTodo[indexTodo] = updateTodo;
-      setInputActivity('');
-      setDate('');
+      setInputActivity("");
+      setDate("");
       setTodo(newUpdateTodo);
       return cancelEditHandler();
     } else {
-      setTodo([...todo, { ...todoObj }]);
-      setInputActivity('');
-      setDate('');
+      setTodo([...todo, { ...todoObj
+      }]);
+      setInputActivity("");
+      setDate("");
     }
   };
 
-  const TodoDeleteHandler = (todoId) => {
-    const todoFilter = todo.filter((t) => {
+  const TodoDeleteHandler = todoId => {
+    const todoFilter = todo.filter(t => {
       return t.id != todoId;
     });
-    confirm('apakah ingin delete activity?')
-      ? setTodo(todoFilter)
-      : setTodo(todo);
+    confirm("apakah ingin delete activity?") ? setTodo(todoFilter) : setTodo(todo);
 
     if (edit.id) {
       cancelEditHandler();
     }
   };
 
-  const TodoEditHandler = (todo) => {
+  const TodoEditHandler = todo => {
     setInputActivity(todo.inputActivity);
     setDate(todo.date);
     setEdit(todo);
@@ -155,118 +154,53 @@ const Tick = (props) => {
 
   const cancelEditHandler = () => {
     setEdit({});
-    setInputActivity('');
-    setDate('');
+    setInputActivity("");
+    setDate("");
   };
 
-  return /*#__PURE__*/ React.createElement(
-    'section',
-    null,
-    /*#__PURE__*/ React.createElement(
-      'div',
-      {
-        className: 'wrap w1',
-      },
-      /*#__PURE__*/ React.createElement(
-        'h1',
-        {
-          className: 'title',
-        },
-        'Todo List'
-      ),
-      message &&
-        /*#__PURE__*/ React.createElement(
-          'h1',
-          {
-            style: {
-              color: 'red',
-            },
-          },
-          message
-        ),
-      /*#__PURE__*/ React.createElement(
-        'form',
-        {
-          className: ' grid',
-          onSubmit: OnSubmitInput,
-        },
-        /*#__PURE__*/ React.createElement('input', {
-          type: 'text',
-          placeholder: 'Todo...',
-          value: inputActivity,
-          className: 'input',
-          onChange: InputChange,
-        }),
-        /*#__PURE__*/ React.createElement('input', {
-          type: 'date',
-          value: date,
-          className: 'input',
-          onChange: DateChange,
-        }),
-        /*#__PURE__*/ React.createElement(
-          'button',
-          {
-            className: 'btn',
-          },
-          edit.id ? 'Update' : 'Submit'
-        ),
-        edit.id &&
-          /*#__PURE__*/ React.createElement(
-            'button',
-            {
-              className: 'btn',
-              onClick: cancelEditHandler,
-            },
-            'Cancel'
-          )
-      ),
-      todo.length > 0
-        ? /*#__PURE__*/ React.createElement(
-            'ul',
-            null,
-            todo.map((td) => {
-              return /*#__PURE__*/ React.createElement(
-                'li',
-                {
-                  className: 'title wrap w1',
-                  key: td.id,
-                },
-                /*#__PURE__*/ React.createElement(
-                  'h2',
-                  {
-                    className: 'title',
-                  },
-                  td.inputActivity
-                ),
-                /*#__PURE__*/ React.createElement('h4', null, td.date),
-                /*#__PURE__*/ React.createElement(
-                  'button',
-                  {
-                    className: 'btn',
-                    onClick: TodoDeleteHandler.bind(this, td.id),
-                  },
-                  'Delete'
-                ),
-                /*#__PURE__*/ React.createElement(
-                  'button',
-                  {
-                    className: 'btn',
-                    onClick: TodoEditHandler.bind(this, td),
-                  },
-                  'Edit'
-                )
-              );
-            })
-          )
-        : /*#__PURE__*/ React.createElement(
-            'h1',
-            {
-              className: 'title',
-            },
-            'activity empty'
-          )
-    )
-  );
+  return /*#__PURE__*/React.createElement("section", null, /*#__PURE__*/React.createElement("div", {
+    className: "wrap w1"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "title"
+  }, "Todo List"), message && /*#__PURE__*/React.createElement("h1", {
+    style: {
+      color: "red"
+    }
+  }, message), /*#__PURE__*/React.createElement("form", {
+    className: " grid",
+    onSubmit: OnSubmitInput
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    placeholder: "Todo...",
+    value: inputActivity,
+    className: "input",
+    onChange: InputChange
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    value: date,
+    className: "input",
+    onChange: DateChange
+  }), /*#__PURE__*/React.createElement("button", {
+    className: "btn"
+  }, edit.id ? "Update" : "Submit"), edit.id && /*#__PURE__*/React.createElement("button", {
+    className: "btn",
+    onClick: cancelEditHandler
+  }, "Cancel")), todo.length > 0 ? /*#__PURE__*/React.createElement("ul", null, todo.map(td => {
+    return /*#__PURE__*/React.createElement("li", {
+      className: "title wrap w1",
+      key: td.id
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "title"
+    }, td.inputActivity), /*#__PURE__*/React.createElement("h4", null, td.date), /*#__PURE__*/React.createElement("button", {
+      className: "btn",
+      onClick: TodoDeleteHandler.bind(this, td.id)
+    }, "Delete"), /*#__PURE__*/React.createElement("button", {
+      className: "btn",
+      onClick: TodoEditHandler.bind(this, td)
+    }, "Edit"));
+  })) : /*#__PURE__*/React.createElement("h1", {
+    className: "title"
+  }, "activity empty")));
 };
 
-ReactDOM.render(/*#__PURE__*/ React.createElement(Tick, null), root);
+ReactDOM.render( /*#__PURE__*/React.createElement(Tick, null), root);
